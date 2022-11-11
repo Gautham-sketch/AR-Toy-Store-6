@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Project 171</title>
+        <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+        <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
+        <link href="./style.css">
+
+        <script src="./js/addButton.js"></script>
+        <script src="./js/addMarker.js"></script>
+        <script src="./js/markerHandler.js"></script>
+
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+          
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+              apiKey: "AIzaSyD2gv61Hkra_m3zShC3m1f72g7rnKcOdhc",
+              authDomain: "ar-toy-store-5f0b6.firebaseapp.com",
+              projectId: "ar-toy-store-5f0b6",
+              storageBucket: "ar-toy-store-5f0b6.appspot.com",
+              messagingSenderId: "858926767310",
+              appId: "1:858926767310:web:dd5430b392925198e1849f"
+            };
+          
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+        </script>
+
+    </head>
+
+    <body>
+        <a-scene id="main-scene" vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; 
+        sourceWidth:1280; sourceHeight:960; 
+        displayWidth: 1280; displayHeight: 960; 
+        debugUIEnabled: false;" gesture-detector create-markers create-buttons>
+            <!-- Camera -->
+            <a-entity camera></a-entity>
+        </a-scene>
+        <div id="button-div" class="fixed-bottom"></div>
+
+        <!-- Order Summary Boilerplate -->
+        <div class="container">
+            <div id="modal-div" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Order Summary</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="toy-responsive">
+                    <table class="toy toy-condensed">
+                        <thead>
+                        <tr>
+                            <td><strong>Item</strong></td>
+                            <td class="text-center"><strong>Price</strong></td>
+                            <td class="text-center"><strong>Quantity</strong></td>
+                            <td class="text-right"><strong>Total</strong></td>
+                        </tr>
+                        </thead>
+                        <tbody id="bill-toy-body">
+                        <!-- Ma'am this part I have a doubt.... -->
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="pay-button" type="button" class="btn btn-primary">
+                    Pay Now
+                    </button>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+  <script>
+    function closeModal() {
+      document.getElementById("modal-div").style.display = "none";
+    }
+  </script>
+    </body>
+</html>
